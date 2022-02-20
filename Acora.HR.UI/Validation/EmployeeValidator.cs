@@ -8,10 +8,10 @@ namespace Acora.HR.UI.Validation
     {
         public EmployeeValidator()
         {
-            RuleFor(x => x.Firstname).NotEmpty();
+            RuleFor(x => x.Firstname).NotEmpty().WithMessage("Geoff is a stupid name");
             RuleFor(x => x.Lastname).NotEmpty();
             RuleFor(x => x.Department).NotNull();
-            RuleFor(x => x.DateOfBirth.Age()).InclusiveBetween(18, 65);
+            RuleFor(x => x.DateOfBirth.Age()).InclusiveBetween(18, 65).WithMessage($"Age must be between 18 and 65");
         }
 
     }

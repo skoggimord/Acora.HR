@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Employees List</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -13,15 +13,16 @@
 <table class="table">
     <thead>
         <tr>
+
+            <th>@Html.ActionLink(@Html.DisplayNameFor(model => model.Employee[0].EmployeeNumber), null, new { sortOrder = ViewData["IdSortParam"] })</th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].DateOfBirth)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Firstname)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Lastname)
-            </th>
+            <th>@Html.ActionLink(@Html.DisplayNameFor(model => model.Employee[0].Lastname), null, new { sortOrder = ViewData["NameSortParam"] })</th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Address)
             </th>
@@ -35,32 +36,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Employee) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.Name)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.EmployeeNumber">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.EmployeeNumber">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Employee)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.EmployeeNumber)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.EmployeeNumber">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.EmployeeNumber">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

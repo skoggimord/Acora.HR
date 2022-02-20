@@ -1,14 +1,10 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Acora.HR.UI.Data.Models;
+using Acora.HR.UI.Validation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Acora.HR.UI.Data;
-using Acora.HR.UI.Data.Models;
-using Acora.HR.UI.Validation;
 
 namespace Acora.HR.UI.Pages
 {
@@ -23,7 +19,7 @@ namespace Acora.HR.UI.Pages
 
         public IActionResult OnGet()
         {
-        ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id");
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
             return Page();
         }
 
@@ -33,13 +29,15 @@ namespace Acora.HR.UI.Pages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+
             var validator = new EmployeeValidator();
 
-            var validationResult = validator.Validate(Employee);
+            var results =  await validator.ValidateAsync(Employee);
 
-            if (!ModelState.IsValid || !validationResult.IsValid)
+            if (!results.IsValid)
             {
-                // Pass validation failures from validator back to the page
+                results.AddToModelState(ModelState, null);
+                ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
                 return Page();
             }
 

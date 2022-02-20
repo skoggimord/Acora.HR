@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Acora.HR.UI.Data;
 using Acora.HR.UI.Data.Models;
+using Acora.HR.UI.Validation;
+using FluentValidation.AspNetCore;
 
 namespace Acora.HR.UI.Pages
 {
@@ -38,7 +40,7 @@ namespace Acora.HR.UI.Pages
             {
                 return NotFound();
             }
-           ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id");
+           ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
             return Page();
         }
 
@@ -46,11 +48,19 @@ namespace Acora.HR.UI.Pages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+
+
+            var validator = new EmployeeValidator();
+
+            var results = await validator.ValidateAsync(Employee);
+
+            if (!results.IsValid)
             {
+                results.AddToModelState(ModelState, null);
+                ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
                 return Page();
             }
-
+            
             _context.Attach(Employee).State = EntityState.Modified;
 
             try

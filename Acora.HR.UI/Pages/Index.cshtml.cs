@@ -14,12 +14,34 @@ namespace Acora.HR.UI.Pages
             _context = context;
         }
 
-        public IList<Employee> Employee { get;set; }
+        public IList<Employee> Employee { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
-            Employee = await _context.Employees
-                .Include(e => e.Department).ToListAsync();
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["IdSortParam"] = sortOrder == "id" ? "id_desc" : "id";
+
+            IQueryable<Employee> employees =  _context.Employees.Include(e => e.Department);
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    employees = employees.OrderByDescending(s => s.Lastname);
+                    break;
+
+                case "id":
+                    employees = employees.OrderBy(s => s.EmployeeNumber);
+                    break;
+
+                case "id_desc":
+                    employees = employees.OrderByDescending(s => s.EmployeeNumber);
+                    break;
+                default:
+                    employees = employees.OrderBy(s => s.Lastname);
+                    break;
+            }
+
+            Employee = await employees.ToListAsync();
         }
     }
 }
