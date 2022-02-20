@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "5kQ6V4JoqekSPyE3n9jvUPUD9gw9CxhuEsQJiFFupJTQmgi6WS3iFmYJ8Oqzh0hr4YcYRHhM0QZL0YpYZhxkGg==",
+  "dgSpecHash": "ce/HcrcMRIXdYSCMfZYtgJyYD5C5DloTTAWNP5s1w3t0r30yBl0RMyl0nAJFqqz/9Lc5l68ftupooxDPfiNzSQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\micha\\source\\repos\\Acora.HR\\Acora.HR.UI\\Acora.HR.UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\micha\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.6\\fluentvalidation.aspnetcore.10.3.6.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.6\\fluentvalidation.dependencyinjectionextensions.10.3.6.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

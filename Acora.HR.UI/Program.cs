@@ -1,5 +1,9 @@
 using System.Configuration;
 using Acora.HR.UI.Data;
+using Acora.HR.UI.Data.Models;
+using Acora.HR.UI.Validation;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +12,8 @@ var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<EmployeeContext>(opt => opt.UseSqlServer(connection));
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddFluentValidation();
+builder.Services.AddTransient<IValidator<Employee>, EmployeeValidator>();
 
 var app = builder.Build();
 
