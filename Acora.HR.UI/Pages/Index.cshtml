@@ -1,0 +1,66 @@
+﻿@page
+@model Acora.HR.UI.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Department)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employee) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.EmployeeNumber">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.EmployeeNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
